@@ -214,14 +214,14 @@ class RestPyModule:
             self.logger.error(f"[{self.name}] Error in request - {field_errors}")
             return self._prepare_response(rp_url, None, field_errors)
 
-        self.login()
+        status = self.login()
         response, counter_request, is_refreshed = None, 0, False
         while counter_request < self.RETRIES_URL:
             response = self._send_request(request_method, rp_url, response, url_params, query_params, data_params, **xtra_params)
             counter_request += 1
             if self._check_login_action(response) and not is_refreshed:
                 self.logger.info(f"[{self.name}] Login refreshed")
-                is_refreshed = self.login(refresh=True)
+                is_refreshed, status = True, self.login(refresh=True)
                 continue
             if self._check_retry_action_and_timeout(response):
                 time.sleep(self.RETRIES_TIMEOUT_SECONDS)
