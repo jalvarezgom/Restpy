@@ -1,3 +1,43 @@
+[project]
+name = "RestPy"
+version = "1.0.0"
+description = "RestPy is a python library that serves to manage and process in an aggregated and comfortable way the requests to a domain based on a REST API. It allows to manage different types of authentication such as Basic, Token and OAuth2.0."
+authors = [
+    {name = "Jancel", email = "ja.alvarezgom@gmail.com"},
+]
+dependencies = [
+    "requests>=2.32.3",
+    "xmltodict>=0.13.0",
+]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = {text = "mit"}
+
+
+[project.urls]
+Homepage = "https://github.com/jalvarezgom/RestPy"
+Issues = "https://github.com/jalvarezgom/RestPy/issues"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.dev-dependencies]
+lint = [
+    "ruff>=0.5.5",
+]
+test = [
+    "pytest>=8.3.2",
+]
+
+[tool.pdm.scripts]
+lint.composite = ["ruff check --fix", "ruff format"]
+test = "pytest"
+
+[tool.ruff]
 # Exclude a variety of commonly ignored directories.
 exclude = [
     ".bzr",
@@ -35,7 +75,7 @@ indent-width = 4
 # Assume Python 3.8
 target-version = "py311"
 
-[lint]
+[tool.ruff.lint]
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
 # Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
 # McCabe complexity (`C901`) by default.
@@ -49,7 +89,7 @@ unfixable = []
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
-[format]
+[tool.ruff.format]
 # Like Black, use double quotes for strings.
 quote-style = "double"
 

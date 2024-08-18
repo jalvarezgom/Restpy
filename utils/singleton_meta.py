@@ -12,5 +12,5 @@ class SingletonClass(SingletonMeta):
 
     def __init__(self, headers: dict = None, base_url: str = None, base_url_params: list = None, auth_action=None):
         if not self._is_init:
-            obj = super().__init__(headers, base_url, base_url_params, auth_action)
+            super().__init__(headers, base_url, base_url_params, auth_action)
             self._is_init = True

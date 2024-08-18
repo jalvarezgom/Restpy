@@ -222,6 +222,7 @@ class RestPyModule:
             if self._check_login_action(response) and not is_refreshed:
                 self.logger.info(f"[{self.name}] Login refreshed")
                 is_refreshed, status = True, self.login(refresh=True)
+                self.logger.debug(f"[{self.name}] Retried login - Result: {status}")
                 continue
             if self._check_retry_action_and_timeout(response):
                 time.sleep(self.RETRIES_TIMEOUT_SECONDS)
@@ -322,7 +323,7 @@ class RestPyModule:
     #         elif value:
     #             params[field] = value
     #     return field_errors
-    
+
     def _validate_request_fields(self, rp_url, url_params, query_params, **xtra_params):
         field_errors = []
         for field_name, rp_field in rp_url.url_fields:
@@ -330,7 +331,6 @@ class RestPyModule:
             if exception:
                 field_errors.append(exception)
                 continue
-
 
     def _validate_response_status(self, rp_url, response, **xtra_params):
         list_exceptions = []

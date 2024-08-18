@@ -3,7 +3,6 @@ class RESTpyResponse:
     _data = None
     _processed_data = None
     errors = None
-    status_code = None
 
     def __init__(self, response, data=None, errors=None):
         self._response = response
